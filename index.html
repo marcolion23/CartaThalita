@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="style.css">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Minha Princesa Thalita </title>
+  <meta name="description" content="Uma página especial com música, vídeo, áudio e versículos – feita com amor." />
+
+  <!-- Fontes Google (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121826;
+      --muted:#9aa3b2;
+      --text:#f6f7fb;
+      --rose:#ff6b9e;
+      --rose-2:#ff9ec2;
+      --accent:#7dd3fc;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 20px;
+      --glass: rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background: radial-gradient(1200px 800px at 80% -10%, rgba(255,107,158,.12), transparent 60%),
+                                     radial-gradient(800px 600px at -10% 20%, rgba(125,211,252,.12), transparent 60%),
+                                     var(--bg);
+      color:var(--text); font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Header/Hero */
+    .hero{
+      position:relative; min-height:92vh; display:grid; place-items:center; padding:64px 20px 32px;
+      overflow:hidden;
+    }
+    .hero::before, .hero::after{
+      content:""; position:absolute; inset:auto auto 10% -10%; width:120vw; height:120vw; pointer-events:none;
+      background:radial-gradient(closest-side, rgba(255,107,158,.06), transparent 70%);
+      filter: blur(60px); transform: rotate(12deg);
+    }
+    .hero h1{
+      font-family:"Great Vibes", cursive; font-size: clamp(48px, 8vw, 96px); line-height:1; margin:0 0 12px; color: #fff;
+      text-shadow: 0 6px 30px rgba(255,107,158,.25);
+    }
+    .subtitle{ color:var(--muted); font-weight:400; max-width:780px; text-align:center; margin:0 auto 28px; font-size:clamp(16px,2.5vw,18px)}
+
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+    .btn{
+      appearance:none; border:none; cursor:pointer; padding:14px 20px; border-radius:999px; font-weight:600; letter-spacing:.2px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-2)); color:#0a0a0a; box-shadow: var(--shadow); transition: transform .2s ease, filter .2s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter:brightness(1.05) }
+    .btn.ghost{
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    /* Navegação flutuante */
+    .nav{
+      position:sticky; top:0; z-index:99; backdrop-filter: blur(10px); background:rgba(11,15,23,.45);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{ display:flex; gap:8px; align-items:center; justify-content:center; padding:10px 14px; flex-wrap:wrap }
+    .nav a{ color:var(--text); text-decoration:none; padding:8px 14px; border-radius:999px; font-size:14px; opacity:.9; border:1px solid transparent}
+    .nav a:hover{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.04) }
+
+    /* Seções */
+    section{ padding:56px 18px }
+    .container{ max-width:1000px; margin:0 auto }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:24px; backdrop-filter: blur(6px);
+    }
+
+    .section-title{
+      font-size: clamp(24px, 3.5vw, 32px); margin:0 0 14px; font-weight:700;
+      display:flex; align-items:center; gap:10px;
+    }
+    .section-sub{ color:var(--muted); margin:0 0 20px; font-size:15px }
+
+    /* Grid cards */
+    .grid{ display:grid; gap:18px }
+    @media(min-width:800px){
+      .grid-2{ grid-template-columns:1fr 1fr }
+      .grid-3{ grid-template-columns:repeat(3,1fr) }
+    }
+
+    /* Playlist */
+    .embed{ width:100%; height:352px; border:0; border-radius:16px; background:#000 }
+
+    /* Vídeo & Áudio */
+    video, audio{ width:100%; outline:none }
+    video{ border-radius:16px; background:#000 }
+    .media-card{ display:grid; gap:16px }
+
+    /* Versículos */
+    .verses{ display:grid; gap:14px }
+    .verse{
+      padding:18px; border-radius:16px; border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(125,211,252,.06), rgba(255,255,255,.02));
+    }
+    .verse b{ color:#ffffff }
+    .verse small{ color:var(--muted) }
+
+    /* Rodapé */
+    footer{
+      padding:28px 18px 64px; text-align:center; color:var(--muted);
+    }
+
+    /* Divisor com corações */
+    .hearts{ display:flex; justify-content:center; gap:8px; margin:18px 0 }
+    .hearts span{ font-size:22px; filter: drop-shadow(0 4px 12px rgba(255,107,158,.35)); animation: float 3s ease-in-out infinite }
+    .hearts span:nth-child(2){ animation-delay:.2s }
+    .hearts span:nth-child(3){ animation-delay:.4s }
+    @keyframes float { 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px) } }
+
+    /* Anotações/Recados */
+    .note{
+      font-size:14px; color:var(--muted); margin-top:8px
+    }
+    .kudos{ font-size:13px; color:var(--muted); text-align:center; margin-top:12px }
+
+    /* Badge com nome */
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:14px;
+      background: linear-gradient(90deg, rgba(255,107,158,.15), rgba(125,211,252,.15)); border:1px solid rgba(255,255,255,.12);
+    }
+
+    /* Citação */
+    blockquote{
+      margin:0; padding:18px 20px; border-left:3px solid var(--rose);
+      background: rgba(255,255,255,.03); border-radius:12px
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container" style="text-align:center">
+      <div class="badge">💖 PARA VOCÊ MINHA PRINCESA</div>
+      <h1>Nosso cantinho secreto</h1>
+      <p class="subtitle">Uma página feita com carinho para guardar músicas, memórias e palavras que contam a nossa história. Tudo em um só lugar, só nosso.</p>
+      <div class="cta-row">
+        <a class="btn" href="#playlist">🎶 Playlist</a>
+        <a class="btn ghost" href="#video">🎥 Vídeo</a>
+        <a class="btn ghost" href="#audio">🎙️ Áudio</a>
+        <a class="btn ghost" href="#versiculos">📖 Versículos</a>
+      </div>
+      <div class="hearts" aria-hidden="true"><span>💗</span><span>💗</span><span>💗</span><span>💗</span><span>💗</span></div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#playlist">Playlist</a>
+      <a href="#video">Vídeo</a>
+      <a href="#audio">Áudio</a>
+      <a href="#versiculos">Versículos</a>
+    </div>
+  </nav>
+
+<!-- PLAYLIST -->
+<section id="playlist">
+  <div class="container">
+    <h2 class="section-title">🎶 Músicas que me lembram VOCÊ</h2>
+
+    <!-- Primeira playlist -->
+    <div class="card" style="padding:0; margin-bottom:24px; overflow:hidden;">
+      <!-- Capa personalizada -->
+      <img src="img/FOTO1.jpeg" alt="Playlist Sertanejo" 
+           style="width:100%; display:block; border-top-left-radius:12px; border-top-right-radius:12px;">
+      <!-- Player do Spotify menor -->
+      <iframe class="embed" 
+              style="border-radius:0 0 12px 12px; display:block;" 
+              src="https://open.spotify.com/embed/playlist/4qZF5OXJ1KOpg0wq8lYo5R?utm_source=generator" 
+              width="100%" 
+              height="200" 
+              frameborder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              allowfullscreen
+              loading="lazy"
+              title="Playlist Sertanejo">
+      </iframe>
+    </div>
+
+    <!-- Segunda playlist -->
+    <div class="card" style="padding:0; margin-bottom:24px; overflow:hidden;">
+      <!-- Capa personalizada -->
+      <img src="img/FOTO2.jpeg" alt="Playlist Romântica" 
+           style="width:100%; display:block; border-top-left-radius:12px; border-top-right-radius:12px;">
+      <!-- Player do Spotify menor -->
+      <iframe class="embed" 
+              style="border-radius:0 0 12px 12px; display:block;" 
+              src="https://open.spotify.com/embed/playlist/2EAJ8AvAZ69cwB3gJRIj1m?utm_source=generator" 
+              width="100%" 
+              height="200" 
+              frameborder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              allowfullscreen
+              loading="lazy"
+              title="Playlist Romântica">
+      </iframe>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+  <!-- VÍDEO ESPECIAL -->
+  <section id="video">
+    <div class="container grid grid-2">
+      <div class="media-card card">
+        <h2 class="section-title">🎥 Vídeo especial</h2>
+        <p class="section-sub">Bastidores rapidamente montando essa carta, esse presente que fiz para VOCE!</p>
+        <!-- Substitua o arquivo video.mp4 pelo seu. Você pode hospedar o vídeo junto desta página. -->
+        <video controls playsinline poster="" preload="metadata">
+          <source src="video.mp4" type="video/mp4" />
+          Seu navegador não suporta o vídeo HTML5.
+        </video>
+        <p class="note">Opcional: se você subir o vídeo no YouTube como <i>não listado</i>, pode trocar por um <code>&lt;iframe&gt;</code> incorporado.</p>
+      </div>
+      <div class="card">
+        <blockquote>          
+            Essa carta é só um pedaço do que sinto por VOCÊ, mas precisava deixar registrado e guardado no SEU e no meu CORAÇÃO.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁUDIO SECRETO -->
+  <section id="audio">
+    <div class="container grid grid-2">
+      <div class="card media-card">
+        <h2 class="section-title">🎙️Áudio secreto</h2>
+        <!-- Substitua audio.mp3 pelo seu arquivo de áudio. -->
+        <audio controls preload="metadata">
+          <source src="audio.mp3" type="audio/mpeg" />
+          Seu navegador não suporta áudio HTML5.
+        </audio>
+        <ul class="note">
+          <li>Refaça um agradecimento a Deus por ela.</li>
+          <li>Deixe uma promessa (cuidar, estar junto, orar).</li>
+          <li>Finalize com um “eu te amo” em voz baixa.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px">Mensagem para VOCÊ 💞</h3>
+        <p style="margin:0">“Às vezes a caneta não escreve tudo o que o CORAÇÃO sente. Então feche os olhos e só escute.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERSÍCULOS -->
+  <section id="versiculos">
+    <div class="container">
+      <h2 class="section-title">📖Versículos que fazem sentido de acordo com a CARTA que te escrevi!</h2>
+      <p class="section-sub">Versíulos que têm tudo a ver com a carta e com OS NOSSOS PROPÓSITOS E SONHOS.</p>
+      <div class="grid grid-3">
+        <div class="verse">
+          <b>Propósito</b>
+          <p>“Porque eu bem sei os pensamentos que penso em vós, diz o SENHOR; pensamento de paz, e não de mal, para voz dar o fim que esperais.”<br><small>Jeremias 29:11</small></p>
+        </div>
+        
+        <div class="verse">
+          <b>Jesus no centro</b>
+          <p>“Se o SENHOR não edificar a casa, em vão trabalham os que a edificam; se o SENHOR não guardar a cidade, em vão vigia a sentinela<br><small>Salmos 127:1</small></p>
+        </div>
+
+        <div class="verse">
+          <b>Paciência</b>
+          <p>"Confia no SENHOR as tuas obras,e teus pensamentos serão estabelecidos."<br><small>Provérbios 16:3</small></p>
+        </div>
+
+        <div class="verse">
+          <b>Coragem e fé</b>
+          <p>"Nao to mandei eu? Esforça-te, e tem bom ânimo; não pasmes, nem te espantes: porque o SENHOR teu DEUS é contigo, por onde quer que andares.”<br><small>Josué 1:9</small></p>
+        </div>
+
+        <div class="verse">
+          <b>União</b>
+          <p>“Melhor é serem dois do que um, porque têm melhor paga do seu trabalho.”<br><small>Eclesiastes 4:9</small></p>
+        </div>
+
+        <div  class="verse" >
+            <b> Tempo </b>
+            <p> "Tudo tem o seu tempo determinado, e há tempo para todo o propósito debaixo do CÉU:"<br><small>Eclesiastes 3:1</small> </p>
+        </div>
+         <div class="verse" >
+            <b> Jesus </b>
+            <p>        "O SENHOR é meu PASTOR: nada me faltará."<br><small>Salmos 23:1</small></p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Feito com 💗 por VOCÊ. | <span style="opacity:.8">DEUS no centro, na NOSSA frente e no comando de TUDO! SEMPRE.</span>
+  </footer>
+</body>
+</html>
