@@ -167,3 +167,60 @@ footer {
   background: rgba(255,107,158,.06);
   transform: scale(1.05);
 }
+/* Corações caindo */
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+.floating-heart {
+  position: fixed;
+  top: -10vh;
+  pointer-events: none;
+  z-index: 0; /* atrás do conteúdo */
+  filter: drop-shadow(0 4px 12px rgba(255,107,158,.35));
+}
+/* Galeria aproveita suas classes .grid e .card */
+#fotos img {
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 0; /* imagem já encaixa no .card arredondado */
+  transition: transform .3s ease;
+}
+#fotos .card:hover img { transform: scale(1.02); }
+section {
+  padding-top: 70px; /* altura da nav */
+  margin-top: -70px; /* compensa a navegação sticky */
+}
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 24px 0; /* espaço antes e depois */
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 3px solid rgba(255,255,255,.2); /* linha mais grossa */
+}
+
+.divider::before {
+  margin-right: 10px;
+}
+
+.divider::after {
+  margin-left: 10px;
+}
+
+.divider span {
+  color: var(--rose-2); /* cor do coração */
+  font-size: 18px;
+}
+.card blockquote {
+  text-align: center;   /* centraliza horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;         /* ocupa toda a altura do card, se necessário */
+}

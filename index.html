@@ -10,6 +10,8 @@
 
   <!-- Fontes Google (opcional) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- AOS (animações de scroll) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
     :root{
@@ -48,17 +50,6 @@
       text-shadow: 0 6px 30px rgba(255,107,158,.25);
     }
     .subtitle{ color:var(--muted); font-weight:400; max-width:780px; text-align:center; margin:0 auto 28px; font-size:clamp(16px,2.5vw,18px)}
-
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
-    .btn{
-      appearance:none; border:none; cursor:pointer; padding:14px 20px; border-radius:999px; font-weight:600; letter-spacing:.2px;
-      background: linear-gradient(135deg, var(--rose), var(--rose-2)); color:#0a0a0a; box-shadow: var(--shadow); transition: transform .2s ease, filter .2s ease;
-    }
-    .btn:hover{ transform: translateY(-2px); filter:brightness(1.05) }
-    .btn.ghost{
-      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
-    }
 
     /* Navegação flutuante */
     .nav{
@@ -138,44 +129,35 @@
       margin:0; padding:18px 20px; border-left:3px solid var(--rose);
       background: rgba(255,255,255,.03); border-radius:12px
     }
+
+    /* Corações caindo */
+    .floating-heart{
+      position:fixed; top:-50px; z-index:1000; pointer-events:none;
+      animation: fall 5s linear infinite;
+    }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="container" style="text-align:center">
-      <div class="badge">💖 PARA VOCÊ MINHA PRINCESA</div>
-      <h1>Nosso cantinho secreto</h1>
-      <p class="subtitle">Uma página feita com carinho para guardar músicas, memórias e palavras que contam a nossa história. Tudo em um só lugar, só nosso.</p>
-      <div class="cta-row">
-        <a class="btn" href="#playlist">🎶 Playlist</a>
-        <a class="btn ghost" href="#video">🎥 Vídeo</a>
-        <a class="btn ghost" href="#audio">🎙️ Áudio</a>
-        <a class="btn ghost" href="#versiculos">📖 Versículos</a>
-      </div>
-      <div class="hearts" aria-hidden="true"><span>💗</span><span>💗</span><span>💗</span><span>💗</span><span>💗</span></div>
-    </div>
-  </header>
+<header class="hero">
+  <div class="container" style="text-align:center">
+    <div class="badge">💖 PARA VOCÊ MINHA PRINCESA</div>
+    <h1>Nosso cantinho secreto</h1>
+    <p class="subtitle">Uma página feita com carinho para guardar músicas, memórias e palavras que contam a nossa história. Tudo em um só lugar, só nosso.</p>
+    <div class="hearts" aria-hidden="true"><span>💗</span><span>💗</span><span>💗</span><span>💗</span><span>💗</span></div>
+  </div>
+</header>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#playlist">Playlist</a>
-      <a href="#video">Vídeo</a>
-      <a href="#audio">Áudio</a>
-      <a href="#versiculos">Versículos</a>
-    </div>
-  </nav>
+
+<div class="divider"><span>💗</span></div>
 
 <!-- PLAYLIST -->
 <section id="playlist">
   <div class="container">
-    <h2 class="section-title">🎶 Músicas que me lembram VOCÊ</h2>
+    <h2 class="section-title">🎶 Playlist das Músicas que me lembram VOCÊ!</h2>
 
     <!-- Primeira playlist -->
     <div class="card" style="padding:0; margin-bottom:24px; overflow:hidden;">
-      <!-- Capa personalizada -->
-      <img src="img/FOTO1.jpeg" alt="Playlist Sertanejo" 
-           style="width:100%; display:block; border-top-left-radius:12px; border-top-right-radius:12px;">
-      <!-- Player do Spotify menor -->
+      <h3 style="margin:0; padding:12px; font-size:16px; text-align:center;">Playlist Músicas Inglês </h3>
       <iframe class="embed" 
               style="border-radius:0 0 12px 12px; display:block;" 
               src="https://open.spotify.com/embed/playlist/4qZF5OXJ1KOpg0wq8lYo5R?utm_source=generator" 
@@ -191,10 +173,7 @@
 
     <!-- Segunda playlist -->
     <div class="card" style="padding:0; margin-bottom:24px; overflow:hidden;">
-      <!-- Capa personalizada -->
-      <img src="img/FOTO2.jpeg" alt="Playlist Romântica" 
-           style="width:100%; display:block; border-top-left-radius:12px; border-top-right-radius:12px;">
-      <!-- Player do Spotify menor -->
+      <h3 style="margin:0; padding:12px; font-size:16px; text-align:center;">Playlist Músicas Brasileiras </h3>
       <iframe class="embed" 
               style="border-radius:0 0 12px 12px; display:block;" 
               src="https://open.spotify.com/embed/playlist/2EAJ8AvAZ69cwB3gJRIj1m?utm_source=generator" 
@@ -210,100 +189,185 @@
 
   </div>
 </section>
+<div class="divider"><span>💗</span></div>
 
+<!-- VÍDEO ESPECIAL -->
+<section id="video">
+  <div class="container grid grid-2">
 
-
-
-  <!-- VÍDEO ESPECIAL -->
-  <section id="video">
-    <div class="container grid grid-2">
-      <div class="media-card card">
-        <h2 class="section-title">🎥 Vídeo especial</h2>
-        <p class="section-sub">Bastidores rapidamente montando essa carta, esse presente que fiz para VOCE!</p>
-        <!-- Substitua o arquivo video.mp4 pelo seu. Você pode hospedar o vídeo junto desta página. -->
-        <video controls playsinline poster="" preload="metadata">
-          <source src="video.mp4" type="video/mp4" />
-          Seu navegador não suporta o vídeo HTML5.
-        </video>
-        <p class="note">Opcional: se você subir o vídeo no YouTube como <i>não listado</i>, pode trocar por um <code>&lt;iframe&gt;</code> incorporado.</p>
-      </div>
       <div class="card">
-        <blockquote>          
-            Essa carta é só um pedaço do que sinto por VOCÊ, mas precisava deixar registrado e guardado no SEU e no meu CORAÇÃO.
-        </blockquote>
+      <blockquote>          
+          Essa carta é só um pedaço do que sinto por VOCÊ, mas precisava deixar registrado e guardado no SEU e no meu CORAÇÃO.
+      </blockquote>
+    </div>
+    <div class="media-card card">
+      <h2 class="section-title">🎥 Vídeo especial</h2>
+      <p class="section-sub">Bastidores rapidamente montando essa carta, esse presente que fiz para VOCE!</p>
+      <video controls playsinline poster="" preload="metadata">
+        <source src="video.mp4" type="video/mp4" />
+        Seu navegador não suporta o vídeo HTML5.
+      </video>
+      <p class="note">Opcional: se você subir o vídeo no YouTube como <i>não listado</i>, pode trocar por um <code>&lt;iframe&gt;</code> incorporado.</p>
+    </div>
+  
+  </div>
+</section>
+<div class="divider"><span>💗</span></div>
+
+<!-- ÁUDIO SECRETO -->
+<section id="audio">
+  <div class="container grid grid-2">
+
+    <!-- Card da mensagem -->
+    <div class="card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <h3 style="margin:0 0 8px">Mensagem para VOCÊ 💞</h3>
+      <p style="margin:0">Às vezes a caneta não escreve tudo o que o CORAÇÃO sente. Então feche os olhos e só escute.</p>
+    </div>
+
+    <!-- Card do áudio -->
+    <div class="card media-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <h2 class="section-title">🎙️Áudio secreto</h2>
+      <audio controls preload="metadata">
+        <source src="audio.mp3" type="audio/mpeg" />
+        Seu navegador não suporta áudio HTML5.
+      </audio>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><span>💗</span></div>
+
+<!-- FOTOS -->
+<section id="fotos">
+  <div class="container">
+    <h2 class="section-title">📸 Momentos nossos</h2>
+    <div class="grid grid-3">
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto1.JPG" alt="Foto nossa 1" style="width:135%;display:block">
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto2.JPG" alt="Foto nossa 2" style="width:100%;display:block">
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto3.JPG" alt="Foto nossa 3" style="width:135%;display:block">
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto4.JPG" alt="Foto nossa 4" style="width:100%;display:block">
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto6.JPG" alt="Foto nossa 6" style="width:100%;display:block">
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="assets/foto7.JPG" alt="Foto nossa 7" style="width:100%;display:block">
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ÁUDIO SECRETO -->
-  <section id="audio">
-    <div class="container grid grid-2">
-      <div class="card media-card">
-        <h2 class="section-title">🎙️Áudio secreto</h2>
-        <!-- Substitua audio.mp3 pelo seu arquivo de áudio. -->
-        <audio controls preload="metadata">
-          <source src="audio.mp3" type="audio/mpeg" />
-          Seu navegador não suporta áudio HTML5.
-        </audio>
-        <ul class="note">
-          <li>Refaça um agradecimento a Deus por ela.</li>
-          <li>Deixe uma promessa (cuidar, estar junto, orar).</li>
-          <li>Finalize com um “eu te amo” em voz baixa.</li>
-        </ul>
+<div class="divider"><span>💗</span></div>
+
+<!-- VERSÍCULOS -->
+<section id="versiculos">
+  <div class="container">
+    <h2 class="section-title">📖 Versículos que fazem sentido de acordo com a CARTA que te escrevi!</h2>
+    <p class="section-sub">Versículos que têm tudo a ver com a carta e com OS NOSSOS PROPÓSITOS E SONHOS.</p>
+
+    <div class="grid grid-3">
+      <div class="verse">
+        <b>📖 Coragem e fé</b>
+        <p>"Nao to mandei eu? Esforça-te, e tem bom ânimo; não pasmes, nem te espantes: porque o SENHOR teu DEUS é contigo, por onde quer que andares.”<br><small>Josué 1:9</small></p>
       </div>
-      <div class="card">
-        <h3 style="margin:0 0 8px">Mensagem para VOCÊ 💞</h3>
-        <p style="margin:0">“Às vezes a caneta não escreve tudo o que o CORAÇÃO sente. Então feche os olhos e só escute.”</p>
+
+      <div class="verse">
+        <b>📖 Jesus</b>
+        <p>"O SENHOR é meu PASTOR: nada me faltará."<br><small>Salmos 23:1</small></p>
       </div>
-    </div>
-  </section>
 
-  <!-- VERSÍCULOS -->
-  <section id="versiculos">
-    <div class="container">
-      <h2 class="section-title">📖Versículos que fazem sentido de acordo com a CARTA que te escrevi!</h2>
-      <p class="section-sub">Versíulos que têm tudo a ver com a carta e com OS NOSSOS PROPÓSITOS E SONHOS.</p>
-      <div class="grid grid-3">
-        <div class="verse">
-          <b>Propósito</b>
-          <p>“Porque eu bem sei os pensamentos que penso em vós, diz o SENHOR; pensamento de paz, e não de mal, para voz dar o fim que esperais.”<br><small>Jeremias 29:11</small></p>
-        </div>
-        
-        <div class="verse">
-          <b>Jesus no centro</b>
-          <p>“Se o SENHOR não edificar a casa, em vão trabalham os que a edificam; se o SENHOR não guardar a cidade, em vão vigia a sentinela<br><small>Salmos 127:1</small></p>
-        </div>
+      <div class="verse">
+        <b>📖 Paciência</b>
+        <p>"Confia no SENHOR as tuas obras,e teus pensamentos serão estabelecidos."<br><small>Provérbios 16:3</small></p>
+      </div>
 
-        <div class="verse">
-          <b>Paciência</b>
-          <p>"Confia no SENHOR as tuas obras,e teus pensamentos serão estabelecidos."<br><small>Provérbios 16:3</small></p>
-        </div>
+      <div class="verse">
+        <b>📖 Tempo</b>
+        <p>"Tudo tem o seu tempo determinado, e há tempo para todo o propósito debaixo do CÉU:"<br><small>Eclesiastes 3:1</small></p>
+      </div>
 
-        <div class="verse">
-          <b>Coragem e fé</b>
-          <p>"Nao to mandei eu? Esforça-te, e tem bom ânimo; não pasmes, nem te espantes: porque o SENHOR teu DEUS é contigo, por onde quer que andares.”<br><small>Josué 1:9</small></p>
-        </div>
+      <div class="verse">
+        <b>📖 União</b>
+        <p>"Melhor é serem dois do que um, porque têm melhor paga do seu trabalho."<br><small>Eclesiastes 4:9</small></p>
+      </div>
 
-        <div class="verse">
-          <b>União</b>
-          <p>“Melhor é serem dois do que um, porque têm melhor paga do seu trabalho.”<br><small>Eclesiastes 4:9</small></p>
-        </div>
-
-        <div  class="verse" >
-            <b> Tempo </b>
-            <p> "Tudo tem o seu tempo determinado, e há tempo para todo o propósito debaixo do CÉU:"<br><small>Eclesiastes 3:1</small> </p>
-        </div>
-         <div class="verse" >
-            <b> Jesus </b>
-            <p>        "O SENHOR é meu PASTOR: nada me faltará."<br><small>Salmos 23:1</small></p>
-        </div>
-        
+      <div class="verse">
+        <b>📖 Propósito</b>
+        <p>"Porque eu bem sei os pensamentos que penso em vós, diz o SENHOR; pensamento de paz, e não de mal, para vos dar o fim que esperais."<br><small>Jeremias 29:11</small></p>
       </div>
     </div>
-  </section>
 
-  <footer>
-    Feito com 💗 por VOCÊ. | <span style="opacity:.8">DEUS no centro, na NOSSA frente e no comando de TUDO! SEMPRE.</span>
-  </footer>
+  </div>
+</section>
+<div class="divider"><span>💗</span></div>
+
+<!-- CONTADOR -->
+<section id="diasJuntos">
+  <div class="container card" style="text-align:center">
+    <h2 class="section-title">⏳ Nosso tempo juntos</h2>
+    <p class="note" style="font-size:18px;color:var(--rose-2)"></p>
+  </div>
+</section>
+
+<footer>
+  Feito com muito AMOR para VOCÊ. | <span style="opacity:.8">DEUS no centro, na NOSSA frente e no comando de TUDO! SEMPRE.</span>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const map = [
+      ["#playlist",   {animation:"fade-up",   duration:900}],
+      ["#video",      {animation:"fade-right",duration:900}],
+      ["#audio",      {animation:"fade-left", duration:900}],
+      ["#versiculos", {animation:"zoom-in",   duration:900}],
+      ["#fotos",      {animation:"fade-up",   duration:900}],
+      ["#diasJuntos", {animation:"zoom-in",   duration:900}]
+    ];
+    map.forEach(([sel, opt])=>{
+      const el = document.querySelector(sel);
+      if(el){
+        el.setAttribute("data-aos", opt.animation);
+        el.setAttribute("data-aos-duration", opt.duration);
+      }
+    });
+    AOS.init();
+  });
+
+  function atualizaDiasJuntos() {
+    const inicio = new Date("2025-02-13T00:00:00"); 
+    const hoje = new Date();
+    const diff = hoje - inicio;
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    document.querySelector("#diasJuntos .note").textContent =
+      `Desde que começamos a conversar em 13/02/2025 já se passaram ${dias} dias 💕`;
+  }
+
+  document.addEventListener("DOMContentLoaded", atualizaDiasJuntos);
+
+  // Corações caindo
+  document.addEventListener("DOMContentLoaded", () => {
+    const total = 16;
+    for (let i = 0; i < total; i++) {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.textContent = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (18 + Math.random() * 26) + "px";
+      heart.style.opacity = 0.75;
+      heart.style.animation = `fall ${4 + Math.random() * 6}s linear ${Math.random()*3}s infinite`;
+      document.body.appendChild(heart);
+    }
+  });
+</script>
 </body>
 </html>
